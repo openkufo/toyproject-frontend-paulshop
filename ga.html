@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<title> 폴 쇼핑 </title>
+		<link rel="stylesheet" href="jquery.lightbox-0.5.css"/>
+		<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+		<script src="jquery.lightbox-0.5.js"></script>
+		<script>
+			var count = new Array();
+			for(var i = 0; i<4; i++){
+				count[i]=0;
+			}
+			$(document).ready(function(){
+				$('a.itemA, a.itemB, a.itemC').lightBox();
+				$('.outer_menu_item').hover(function () {
+                $(this).find('.inner_menu').show();
+	            }, function () {
+	                $(this).find('.inner_menu').hide();
+	            });
+	            
+				var rg_num = $('#rg_num');
+				var rg_num2 = $('#rg_num2');
+				
+				rg_num.keydown(function(){
+					if( rg_num.val().length >=6 ){
+						rg_num2.focus();
+					}
+				});
+				
+				rg_num2.keydown(function(event){
+					var event = event || $(document).event;
+					if(event.keyCode == 8 && rg_num2.val().length==0){
+						rg_num.focus();
+					}
+				});
+				
+				$('#rg_id,#rg_ps').keydown(function(){
+					var temp = $(this).val();
+					if(temp.length!=0&&temp.replace(/^[A-Za-z]{1}[A-za-z0-9]{4,}$/,'').length==0){
+						if($(this).get(0)==$('#rg_id').get(0)){
+							count[0]=1;
+							$(this).css('border','2px solid green');
+							$('#rg_idstat').text("올바른 아이디 입니다.").css('color','blue');
+						}
+						else if($(this).get(0)==$('#rg_ps').get(0)){
+							count[1]=1;
+							$(this).css('border','2px solid green');
+							$('#rg_pstat').text("올바른 패스워드 입니다.").css('color','blue');
+						}
+					}
+					else{
+						if($(this).get(0)==$('#rg_id').get(0)){
+							count[0]=0;
+							$(this).css('border','2px solid red');
+							$('#rg_idstat').html("영문자, 숫자 사용가능 6글자~17 글자 이내 <br>(첫글자는 영문)").css('color','red');
+						}
+						else if($(this).get(0)==$('#rg_ps').get(0)){
+							count[1]=0;
+							$(this).css('border','2px solid red');
+							$('#rg_pstat').html("영문자, 숫자 사용가능 6글자~17 글자 이내 <br>(첫글자는 영문)").css('color','red');
+						}
+					}
+				});
+				
+				$('#rg_psc').blur(function(){
+					var check = $('#rg_ps').val();
+					var this_val = $(this).val();
+					if(check == this_val){
+						count[2]=1;
+						$(this).css('border','2px solid green');
+						$('#rg_pscstat').text("패스워드가 일치합니다.").css('color','blue');
+					}
+					else{
+						count[2]=0;
+						$(this).css('border','2px solid red');
+						$('#rg_pscstat').text("패스워드가 일치하지 않습니다.").css('color','red');
+					}
+				});
+				
+				
+				$('#rg, #home, #title, #co').click(function(){
+					if($(this).get(0)==$('#rg').get(0)){
+						$('#sec_register').css('display','block');
+						$('#sec_tab').css('display','none');
+					}
+					else if($(this).get(0)==$('#home').get(0)){
+						$('#sec_register').css('display','none');
+						$('#sec_tab').css('display','block');
+					}
+					else if($(this).get(0)==$('#title').get(0)){
+						var url = "index.html";
+						$(location).attr('href',url);
+					}
+					else if($(this).get(0)==$('#co').get(0)){
+						var url ="co.html";
+						$(location).attr('href',url);
+					}
+				});
+				
+				var AD_c=0;
+				var IJ=0;
+				var pic = new Array( new Array(), new Array(), new Array() ); //사진 더 추가하고싶으면 여기에 new Array() 하나더 넣기
+				// ex) var pic = new Array( new Array(), new Array(), new Array())
+				
+				for(var i=0;i<pic.length;i++){
+					for(var j=0;j<15;j++){ //몇장씩 출력할건지
+						IJ=i*15+j;	//몇장씩 출력할건지
+						pic[i][j]= '../images/ga/ga'+IJ+'.jpg'; //사진 이름 ex) ga0.jpg || ex2)hello0.jpg hello1.jpg hello2.jpg~~~
+					}
+				}
+					
+				
+				var appendDocument = function(){		 	
+					
+					for(i=0;i<15;i++){	//몇장씩 출력할건지
+						
+					var x = $('<img src='+pic[AD_c][i]+'/>').appendTo('#sec');
+					
+					x.css({ //크기
+						width:290,
+						height:300,
+						margin:5
+					});
+					}
+					AD_c++;	
+									
+				};
+				
+				appendDocument();
+				
+				$(window).scroll(function(){
+					
+					var scrollheight = $(window).scrollTop()+$(window).height();
+					var documentheight = $(document).height();
+					if(scrollheight == documentheight){
+						appendDocument();
+					}
+					
+				});
+				
+				
+				animate1();
+			});
+			
+			var animate1 = function(){
+				$('#ani0').animate({left:'0'},4000,animate2);
+				};
+			var animate2 = function(){
+				$('#ani1').animate({left:'0'},4000,animate3);
+			};
+			var animate3 = function(){
+				$('#ani2').animate({left:'0'},4000,animate4);
+			};
+			var animate4 = function(){
+				$('#ani3').animate({left:'0'},4000,animate5);
+			};
+			var animate5 = function(){
+				$('#ani4').animate({left:'0'},4000,animate6);
+			};
+			var animate6 = function(){
+				$('#ani0, #ani1, #ani2, #ani3, #ani4').stop().animate({left: 290},1000,animate1);	
+			};
+			
+	
+			
+				
+			window.onload = function(){
+				document.getElementById('btn_rg').onclick = function(x){
+					if(count[0]&&count[1]&&count[2]&&count[3])
+						alert('성공적으로 가입 되셨습니다');
+					else
+						x.preventDefault();
+				};
+			};
+			function change_id(){
+				var id = $('#_id');
+				
+				if(id.val() == "아이디"){
+					id.val("");
+	    		}
+	    		else if(id.val() == ""){
+				id.val("아이디");
+	    		}
+			}
+			
+			function change_ps(){
+				var ps = $('#_ps');
+				
+	   			if(ps.val() == "패스워드"){
+	      			ps.val("");
+					ps.attr("type", "password"); 
+	    		}
+	    		else if(ps.val() == ""){
+				ps.attr("type", "text"); 
+				ps.val("비밀번호");
+	    		}
+			}
+			
+			function rg_num2_blur(){
+				var x = document.getElementById('rg_num').value;
+				var y = document.getElementById('rg_num2').value;
+				var rg_birth1 = document.getElementById('rg_birth1');
+				var rg_birth2 = document.getElementById('rg_birth2');
+				var rg_birth3 = document.getElementById('rg_birth3');
+				var year = x.substr(0,2);
+				var month = x.substr(2,2);
+				var day = x.substr(4,2);
+				
+				if(x.length!=0&&y.substr(0,1)==(3||4))
+					year = "20"+year;
+				else if(x.length!=0)
+					year = "19"+year;
+					
+				rg_birth1.setAttribute('value',year);
+				rg_birth2.setAttribute('value',month);
+				rg_birth3.setAttribute('value',day);
+				CheckJuminNumber(x,y);
+			}
+			function CheckJuminNumber(strJunminNumber1, strJunminNumber2) //주민등록번호 유효성검사함수
+			{
+				var rg_numstat = document.getElementById('rg_numstat');
+				var sum;
+			    sum = 0;
+			    sum += strJunminNumber1.charAt(0)*2;
+			    sum += strJunminNumber1.charAt(1)*3;
+			    sum += strJunminNumber1.charAt(2)*4;
+			    sum += strJunminNumber1.charAt(3)*5;
+			    sum += strJunminNumber1.charAt(4)*6;
+			    sum += strJunminNumber1.charAt(5)*7;
+			
+			    sum += strJunminNumber2.charAt(0)*8;
+			    sum += strJunminNumber2.charAt(1)*9;
+			    sum += strJunminNumber2.charAt(2)*2;
+			    sum += strJunminNumber2.charAt(3)*3;
+			    sum += strJunminNumber2.charAt(4)*4;
+			    sum += strJunminNumber2.charAt(5)*5;
+				
+			
+				var checksum = (11 - (sum%11))%10;
+				
+			    if (strJunminNumber2.charAt(6) != checksum || (strJunminNumber1.length != 6 && strJunminNumber2.length != 7))
+			    {
+			    	count[3]=0;
+			    	rg_num.style.border = "2px solid red";
+			    	rg_num2.style.border = "2px solid red";
+			    	rg_numstat.style.color = "red";
+			        rg_numstat.innerHTML ="잘못된 주민등록번호 입니다.";
+			    }
+			    else if(!(strJunminNumber2.charAt(0) == '1' || strJunminNumber2.charAt(0)  == '2' || strJunminNumber2.charAt(0) == '3' || strJunminNumber2.charAt(0) == '4'))
+			    {
+			    	count[3]=0;
+			    	rg_num.style.border = "2px solid red";
+			    	rg_num2.style.border = "2px solid red";
+			    	rg_numstat.style.color = "red";
+			        rg_numstat.innerHTML ="잘못된 주민등록번호 입니다.";
+			    }
+			    else
+			    {
+			    	count[3]=1;
+				    rg_num.style.border = "2px solid green";
+				    rg_num2.style.border = "2px solid green";
+				    rg_numstat.style.color = "blue";
+			        rg_numstat.innerHTML ="올바른 주민등록번호 입니다.";
+		       }
+			}
+
+			
+		</script>
+		<style>
+			*{margin: 0; padding: 0; }
+			body { 
+				font-family: '맑은 고딕', serif;
+				width: 1200px;
+				margin: 0 auto; 
+				background: #efebea;}
+			li { list-style: none; }
+			a { text-decoration: none; }
+			img { border:0; }
+		</style>
+		
+		<style>
+			#All_warp {
+				background: white;
+				margin: 80px 0;
+			}
+			
+			#header {
+				height: 240px;
+				position:relative;
+			}
+			#header > #title > img{
+				position:absolute;
+				float:left;
+			}
+			
+			#header > #title > img:nth-child(2){left:180px;}
+			
+	        #menu {
+	        	position:absolute;
+	            margin-bottom: 20px;
+	            height: 40px;
+	            bottom:0px;
+	        }
+	        
+	        .outer_menu_item {
+	            position: relative; 
+	            float: left;
+	            border-right:1px solid black;
+	            font-size:30px;
+	        }
+	        .outer_menu_item:last-child {border:none;}
+	        .outer_menu_item:hover {
+	        	color: #808080;
+	        	background: #c0c5ce;
+        	}
+	        .menu_title {
+	            display: block;
+	            height: 30px; line-height: 30px;
+	            padding: 5px 60px;
+	        }
+	        .inner_menu {
+	            display: none;
+	            position: absolute;
+	            top: 40px; left: 0;
+	            width: 100%;
+				font-size:15px;
+	            background: white;
+	            box-shadow: 0 2px 6px rgba(5, 5, 5, 0.9);
+	            z-index: 1000;
+	
+	            text-align: center;
+	        }
+	        .inner_menu_item > a {
+	            display: block;
+	            padding: 5px 10px;
+	            color: black;
+	            
+	        }
+	        .inner_menu_item > a:hover {
+	            color: #808080;
+	            background:#e3e4e5;
+	        }
+			
+			.display{
+	        	display:none;
+	        }
+	        
+			#sec_side {
+				overflow:hidden;
+				width: 1200px;
+				
+				margin: 0 auto;
+			}
+			#sec_side > #sec{
+				width:900px;
+				float:left;
+			}
+			#sec_side > #side{
+				position:relative;
+				width:290px;
+				float:right;
+			}
+			#sec_register{
+				
+				display:none;
+				width:700px;
+				height:350px;
+				margin:50px;
+				padding:50px;
+				background:#c8cec8;
+				border:1px dashed;
+			}
+			#sec_registerin{margin:10px 50px;}
+			#sec_tab{
+				position:relative;
+				display:none;
+				width:800px;
+				height:450px;
+				top:50px;
+				left:50px;
+				border:1px solid blue;
+				
+			}
+			#sec_tab > input:nth-of-type(1){display: none;}
+			#sec_tab > input:nth-of-type(1) ~ div:nth-of-type(1) { display: none;}
+			#sec_tab > input:nth-of-type(1):checked ~ div:nth-of-type(1) { display: block;}
+			
+			#sec_tab > input:nth-of-type(2){display: none;}
+			#sec_tab > input:nth-of-type(2) ~ div:nth-of-type(2) { display: none;}
+			#sec_tab > input:nth-of-type(2):checked ~ div:nth-of-type(2) { display: block;}
+			
+			#sec_tab > input:nth-of-type(3){display: none;}
+			#sec_tab > input:nth-of-type(3) ~ div:nth-of-type(3) { display: none;}
+			#sec_tab > input:nth-of-type(3):checked ~ div:nth-of-type(3) { display: block;}
+			
+			section.sec_tab_btn { overflow: hidden;}
+			section.sec_tab_btn > label {
+				display: block;
+				float: left;
+				width: 266px; height: 70px;
+				line-height: 70px;
+				text-align : center;
+				background: #969eaa; color: white;
+				font-size:20px;
+			}
+			section.sec_tab_btn > label:hover{ background: #bec9d8; }
+			section.sec_tab_btn > label:nth-child(2){
+				border-left:1px solid #c5ddd5;
+				border-right:1px solid #c5ddd5;
+			}
+			
+			.tab_img{float: left;}
+		
+			.sec_tr{height:50px;}
+			
+			.btn{width:100px;}
+			#btn_location{
+				position:absolute;
+				left:35%;
+			}
+			
+			#login{
+				position:absolute;
+				top: 50px;
+			}
+			#login_img{border:1px solid black;}
+			
+			.ani{
+				position:absolute;
+				top:150px;
+				left:290px;
+			}
+			#ani{
+				position:absolute;
+				top:150px;
+				left:0px;
+			}
+			
+			#info{
+				width:1200px;
+				text-align:center;
+				display:block;
+				background: #dee1e5;
+			}
+			
+		</style>
+		
+	</head>
+	<body>
+		<div id="All_warp">
+			<header id="header">
+				<div style="cursor:pointer" id="title">
+					<img src="../images/title_rogo.png">
+					<img src="../images/rogo1.png">
+				</div>
+				
+					<nav id="menu">
+						<ul style="cursor:pointer" class="outer_menu">
+							<li id="home"class="outer_menu_item"><span class="menu_title">메인 메뉴</span></li>
+							
+							<li class="outer_menu_item">
+								<span class="menu_title">쇼핑</span>
+								<ul class="inner_menu">
+									<li class="inner_menu_item"><a href="ga.html">가전제품</a></li>
+									<li class="inner_menu_item"><a href="fo.html">식품</a></li>
+									<li class="inner_menu_item"><a href="ne.html">생필품</a></li>
+								</ul>
+							</li>
+							<li class="outer_menu_item">
+								<span class="menu_title">추천 상품</span>
+								<ul class="inner_menu">
+									<li class="inner_menu_item">
+										<a class="itemA" href="../images/ga/ga1.jpg">A세트</a>
+										<nav class="display">
+											<a class="itemA" href="../images/fo/fo27.jpg">A세트</a>
+											<a class="itemA" href="../images/ga/ne13.jpg">A세트</a>
+										</nav>
+									</li>
+									<li class="inner_menu_item">
+										<a class="itemB" href="../images/ga/ga33.jpg">B세트</a>
+										<nav class="display">
+											<a class="itemB" href="../images/fo/fo22.jpg">B세트</a>
+											<a class="itemB" href="../images/ne/ne12.jpg">B세트</a>
+										</nav>
+									</li>
+									<li class="inner_menu_item">
+										<a class="itemC" href="../images/ga/ga43.jpg">C세트</a>
+										<nav class="display">
+											<a class="itemC" href="../images/fo/fo26.jpg">C세트</a>
+											<a class="itemC" href="../images/ne/ne23.jpg">C세트</a>
+										</nav>
+									</li>
+								</ul>
+							</li>
+							<li id="co" class="outer_menu_item"><span class="menu_title">고객센터</span></li>
+							<li id="rg" class="outer_menu_item"><span class="menu_title">회원가입</span></li>
+						</ul>
+					</nav>
+				
+			</header>
+			<div id="sec_side">
+				<section id="sec">
+					
+					<div id="sec_register">
+						<div id="sec_registerin">
+							<table>
+								<tr class="sec_tr">
+									<td> 아이디 </td>
+									<td> <input id="rg_id" maxlength="10" type="text"> </td>
+									<td> <span id="rg_idstat">영문자, 숫자 사용가능 6글자~10 글자 이내 <br>(첫글자는 영문)</span> </td>
+								</tr>
+								
+								<tr class="sec_tr">
+									<td> 패스워드 </td>
+									<td> <input id="rg_ps" maxlength="17" type="password"> </td>
+									<td> <span id="rg_pstat">영문자, 숫자 사용가능 6글자~17 글자 이내 <br>(첫글자는 영문)</span></td>
+								</tr>
+								
+								<tr class="sec_tr">
+									<td> 패스워드 확인 </td>
+									<td> <input id="rg_psc" maxlength="17" type="password"> </td>
+									<td> <span id="rg_pscstat">상태</span></td>
+									
+								</tr>
+								
+								<tr class="sec_tr">
+									<td> 주민등록번호 </td>
+									<td> 
+										<input id="rg_num" size="6" maxlength="6" type="text"> 
+										<span>-</span> 
+										<input id="rg_num2" size="6" maxlength="7" type="password" onblur="rg_num2_blur()">
+									</td>
+									<td> <span id="rg_numstat">상태</span>  </td>
+								</tr>
+								
+								<tr class="sec_tr">
+									<td> 생년월일 </td>
+									<td colspan="2"> 
+										<input id="rg_birth1" size="1" maxlength="4" type="text">년
+										<input id="rg_birth2" size="1" maxlength="2" type="text">월
+										<input id="rg_birth3" size="1" maxlength="2" type="text">일
+									</td>
+								</tr>
+								
+								<tr class="sec_tr">
+									<td> 이름 </td>
+									<td> <input id="rg_name" type="text"></td>
+								</tr>
+							</table>
+							<form id="btn_location">
+								<button class="btn" id="btn_rg">가입</button>
+								<button class="btn" id="btn_can">취소</button>
+							</form>
+						</div>
+					</div>
+					
+					<div id="sec_tab">
+							<input id="sec_ga" type="radio" name="tab" checked>
+							<input id="sec_fo" type="radio" name="tab">
+							<input id="sec_ne" type="radio" name="tab">
+						
+						
+						<section class="sec_tab_btn">
+							<label for="sec_ga">가전제품</label>
+							<label for="sec_fo">식품</label>
+							<label for="sec_ne">생필품</label>
+						</section>
+						
+						<div class="sec_tab_item">
+							<ul>
+								<li class="tab_item">
+									<img class="tab_img" width="266" height="370" src="../images/ga/ga5.jpg">
+								</li>
+								<li class="tab_item">
+									<img class="tab_img" width="266" height="370" src="../images/ga/ga6.jpg">
+								</li>
+								<li class="tab_item">
+									<img class="tab_img" width="266" height="370" src="../images/ga/ga7.jpg">
+								</li>
+							</ul>
+						</div>
+						
+						<div class="sec_tab_item">
+							<ul>
+								<li class="tab_item">
+									<img class="tab_img" width="266" height="370" src="../images/fo/fo22.jpg">
+								</li>
+								<li class="tab_item">
+									<img class="tab_img" width="266" height="370" src="../images/fo/fo30.jpg">
+								</li>
+								<li class="tab_item">
+									<img class="tab_img" width="266" height="370" src="../images/fo/fo43.jpg">
+								</li>
+							</ul>
+						</div>
+						
+						<div class="sec_tab_item">
+							<ul>
+								<li class="tab_item">
+									<img class="tab_img" width="266" height="370" src="../images/ne/ne16.jpg">
+								</li>
+								<li class="tab_item">
+									<img class="tab_img" width="266" height="370" src="../images/ne/ne33.jpg">
+								</li>
+								<li class="tab_item">
+									<img class="tab_img" width="266" height="370" src="../images/ne/ne43.jpg">
+								</li>
+							</ul>
+						</div>
+					</div>
+					
+				</section>
+				<aside id="side">
+					<div>
+						<form id="login">
+							<table>
+								<tr>
+									<td>
+										<input id="_id" value="아이디" type="text" maxlength="10"onfocus="change_id()" onblur="change_id()">
+									</td>
+									<td rowspan="2">
+										<img id="login_img" src="..\images\login.jpg">
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<input id="_ps" value="패스워드" maxlength="17" type="text" onfocus="change_ps()" onblur="change_ps()"/>
+									</td>
+								</tr>
+							</table>
+						</form>
+					</div>
+					<div>
+						<img id="ani" src="../images/ani.jpg" width="230" height="350"/>
+						<img class="ani" id="ani0" src="../images/ani0.jpg" width="230" height="350"/>
+						<img class="ani" id="ani1" src="../images/ani1.jpg" width="230" height="350"/>
+						<img class="ani" id="ani2" src="../images/ani2.jpg" width="230" height="350"/>
+						<img class="ani" id="ani3" src="../images/ani3.jpg" width="230" height="350"/>
+						<img class="ani" id="ani4" src="../images/ani4.jpg" width="230" height="350"/>
+					</div>
+				</aside>
+			</div>
+			
+			<footer id="info">
+				
+				<address> 주 소 :경기도 성남시 수정구 복정로 76 </address>
+				<h2> 연락처:031-720-2114 </h2>
+				<h3> 개발자: 1612096 한 바 울 </h3>
+			</footer>
+		</div>
+	</body>
+</html>

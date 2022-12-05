@@ -1,0 +1,11 @@
+# zay.shop
+Zay.Shop/
+
+# copy file
+*--.html
+
+# zip file
+*.zip
+
+# devlop note
+*.txt

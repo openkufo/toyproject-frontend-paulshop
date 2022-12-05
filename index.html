@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>PS Login</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+        <link rel="apple-touch-icon" href="assets/img/apple-icon.png">
+        <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/templatemo.css">
+        <link rel="stylesheet" href="assets/css/custom.css">
+    
+        <!-- Load fonts style after rendering the layout styles -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+        <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+
+        <style>
+            /* body{
+                display: flex;
+                height: 100vh;
+                justify-content: center;
+                align-items: center;
+                background-color: rgb(245, 245, 245);
+            } */
+
+            /* .test{
+                border: 20px solid lightblue;
+                padding: 5px 20px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 450px; height:250px;
+                margin-left: -220px;
+                margin-top: -170px;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: rgb(245, 245, 245);
+            } */
+
+            /* .center{
+                background-color: white;
+                width: 60%;
+                height: 65%;
+            }
+             */
+
+             body{
+                background-color: rgb(245, 245, 245);
+             }
+             
+            .center{
+                padding: 5px 20px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 700px; height:400px;
+                margin-left: -350px;
+                margin-top: -200px;
+                border-radius: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: white;
+                box-shadow: rgba(0, 0, 0, 0.05) 0px 15px 16.83px 0.17px;
+            }
+
+            .center-left{
+                float: left;
+                padding: 20px;
+                width: 60%;
+                height: 100%;
+            }
+
+            .center-right{
+                float: left;
+                padding: 20px;
+                width: 40%;
+                height: 100%;
+            }
+
+            .center-right-wrap{
+                display: flex;
+                height: 100%;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+            }
+
+            .center-left-wrap{
+                width: 100%;
+                height: 100%;
+            }
+
+            .border-success{
+                border: solid 1px green;
+                opacity: 50%;
+            }
+
+            .border-width{
+                width: 210px;
+                margin-left: 1rem;
+                margin-right: 1rem;
+                border: solid 1px #59ab6e;
+            }
+
+            .opacity{
+                opacity: 70%;
+            }
+            
+            .row{
+                margin-top: 1.7rem;
+            }
+
+            span{
+                margin-left: 1rem;
+            }
+        </style>
+    <!--
+        
+    TemplateMo 559 Zay Shop
+    https://templatemo.com/tm-559-zay-shop
+    
+    -->
+    </head>
+<body>
+        <div class="center">
+            <div class="center-left">
+                <div class="center-left-wrap">
+                    <p class="text-center">로그인</p>
+                    <hr/>
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="user_id" placeholder="아이디">
+                        <label for="user_id">아이디</label>
+                    </div>
+
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="user_pw" placeholder="비밀번호">
+                        <label for="user_pw">비밀번호</label>
+                    </div>
+
+                    <div class="container text-center">
+                        <div class="row">
+                            <button type="button" class="btn btn-outline-secondary" onclick="location.href='main.html'">로그인</button>
+                        </div>
+                        <div class="row">
+                            <button type="button" class="btn btn-outline-secondary" onclick="location.href='sign-up.html'">회원가입</button>
+                        </div>
+                    </div>
+                    <!-- <div class="form-floating">
+                    </div> -->
+
+                </div>
+            </div>
+            <div class="center-right">
+                <div class="center-right-wrap">
+                    <span class="navbar-brand text-success logo h1 align-self-center">PS</span>
+                    <div class="border-width"></div>
+                    <span class="navbar-brand text-success logo h1 align-self-center opacity">Paul Shop</span>
+                    <!-- <hr class="border-width"> -->
+                </div>
+            </div>
+        </div>
+    <!-- <div class="test bg-light">
+
+    </div> -->
+</body>
+</html>
